@@ -120,5 +120,11 @@
   <ItemGroup>
     <Resource Include="health.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\med.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\med2.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
