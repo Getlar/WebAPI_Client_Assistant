@@ -21,7 +21,7 @@ namespace WebAPI_Client_Assistant
     /// </summary>
     public partial class LoginScreen : Window
     {
-        private volatile int tries = 0;
+        private int tries = 0;
         public LoginScreen()
         {
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;

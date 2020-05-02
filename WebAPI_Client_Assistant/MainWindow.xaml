@@ -4,7 +4,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="HealthCare - Assistant" Height="1060" Width="1000">
+        Title="HealthCare - Assistant" Height="1060" Width="1000" FontSize="16">
     <Grid  Background="#403A39">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>

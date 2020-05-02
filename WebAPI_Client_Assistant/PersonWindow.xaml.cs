@@ -243,12 +243,12 @@ namespace WebAPI_Client_Assistant
                             }
                             else
                             {
-                                MessageBox.Show("Incorrect SSN Format!", "Format Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                MessageBox.Show("Incorrect Date Format!", "Format Error", MessageBoxButton.OK, MessageBoxImage.Error);
                             }
                         }
                         else
                         {
-                            MessageBox.Show("Incorrect Date Format!", "Format Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show("Incorrect SSN Format!", "Format Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                     }
                     else
