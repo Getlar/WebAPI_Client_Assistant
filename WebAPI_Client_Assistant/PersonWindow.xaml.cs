@@ -142,10 +142,6 @@ namespace WebAPI_Client_Assistant
                     break;
                 }
             }
-            if(result == false)
-            {
-                MessageBox.Show("Incorrect Name Format!", "Format Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
             return result;
         }
 
@@ -157,13 +153,13 @@ namespace WebAPI_Client_Assistant
             {
                 result = false;
             }
-            else if(date.Length!=16)
+            else if(date.Length==16 || date.Length==19)
+            {
+                result = true;
+            }
+            else
             {
                 result = false;
-            }
-            if (result == false)
-            {
-                MessageBox.Show("Incorrect Date Format!", "Format Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             return result;
         }
@@ -189,10 +185,6 @@ namespace WebAPI_Client_Assistant
                     result = false;
                     break;
                 }
-            }
-            if (result == false)
-            {
-                MessageBox.Show("Incorrect SSN Format!", "Format Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             return result;
         }
@@ -222,20 +214,52 @@ namespace WebAPI_Client_Assistant
 
         private void CompleteButton_Click(object sender, RoutedEventArgs e)
         {
-            if (ValidatePatient() && ValidateName(FirstNameTextBox.Text.ToString()) && ValidateName(LastNameTextBox.Text.ToString()) && ValidateSocialSecurityNumber(SocialSecurityNumberTextBox.Text.ToString()) && ValidateDate(DateOfArrivalTextBox.Text.ToString()))
+            bool FirstNameValidated = ValidateName(FirstNameTextBox.Text.ToString());
+            bool LastNameValidated = ValidateName(LastNameTextBox.Text.ToString());
+            bool SSNValidated = ValidateSocialSecurityNumber(SocialSecurityNumberTextBox.Text.ToString());
+            bool DateValidated = ValidateDate(DateOfArrivalTextBox.Text.ToString());
+            if (ValidatePatient())
             {
-                _person = new Person();
-                _person.FirstName = FirstNameTextBox.Text;
-                _person.LastName = LastNameTextBox.Text;
-                _person.DateOfBirth = DateTextBox.SelectedDate.Value;
-                _person.Address = AddressTextBox.Text;
-                _person.SocialSecurityNumber = SocialSecurityNumberTextBox.Text;
-                _person.Complaint = ComplaintTextBox.Text;
-                DateTime date = DateTime.Parse(DateOfArrivalTextBox.Text);
-                _person.DateOfArrival = date;
-                PersonDataProvider.CreatePerson(_person);
-                DialogResult = true;
-                Close();
+                if (FirstNameValidated)
+                {
+                    if (LastNameValidated)
+                    {
+                        if (SSNValidated)
+                        {
+                            if (DateValidated)
+                            {
+                                _person = new Person();
+                                _person.FirstName = FirstNameTextBox.Text;
+                                _person.LastName = LastNameTextBox.Text;
+                                _person.DateOfBirth = DateTextBox.SelectedDate.Value;
+                                _person.Address = AddressTextBox.Text;
+                                _person.SocialSecurityNumber = SocialSecurityNumberTextBox.Text;
+                                _person.Complaint = ComplaintTextBox.Text;
+                                DateTime date = DateTime.Parse(DateOfArrivalTextBox.Text);
+                                _person.DateOfArrival = date;
+                                PersonDataProvider.CreatePerson(_person);
+                                DialogResult = true;
+                                Close();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Incorrect SSN Format!", "Format Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Incorrect Date Format!", "Format Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Incorrect Name Format!", "Format Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Incorrect Name Format!", "Format Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 
