@@ -24,7 +24,7 @@ namespace WebAPI_Client_Assistant.Models
             DateTime today = DateTime.Now;
             if (today.ToShortDateString() == DateOfArrival.ToShortDateString())
             {
-                return $"Today:  {DateOfArrival.ToShortTimeString()}   {FirstName} {LastName}";
+                return $"Today:          {DateOfArrival.ToShortTimeString()}   {FirstName} {LastName}";
             }
             else
             {

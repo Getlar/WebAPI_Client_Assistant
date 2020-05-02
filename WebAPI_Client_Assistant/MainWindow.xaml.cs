@@ -60,15 +60,21 @@ namespace WebAPI_Client_Assistant
             people = PersonDataProvider.GetPeople();
             DateTime ActualTime = DateTime.Now;
             dateText.Content = "Today's date is: " + ActualTime.ToShortDateString().ToString();
+            IList<Person> SortedList = people.OrderBy(o => o.DateOfArrival).ToList();
             IList<Person> NotDiagnosed = new List<Person>();
-            foreach(Person p in people)
-            {
+            foreach(Person p in SortedList)
+            {;
                 if(p.Diagnosis == null)
                 {
                     NotDiagnosed.Add(p);
                 }
             }
             todayPeople.ItemsSource = NotDiagnosed;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            UpdatePeople();
         }
     }
 }
