@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -23,6 +24,8 @@ namespace WebAPI_Client_Assistant
     public partial class MainWindow : Window
     {
         private IList<Person> people;
+        
+
         public MainWindow(string Text)
         {
             
@@ -63,7 +66,7 @@ namespace WebAPI_Client_Assistant
             IList<Person> SortedList = people.OrderBy(o => o.DateOfArrival).ToList();
             IList<Person> NotDiagnosed = new List<Person>();
             foreach(Person p in SortedList)
-            {;
+            {
                 if(p.Diagnosis == null)
                 {
                     NotDiagnosed.Add(p);
