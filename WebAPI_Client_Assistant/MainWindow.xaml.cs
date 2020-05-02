@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WebAPI_Client_Assistant.DataProviders;
+using WebAPI_Client_Assistant.Models;
 
 namespace WebAPI_Client_Assistant
 {
@@ -20,9 +22,53 @@ namespace WebAPI_Client_Assistant
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        private IList<Person> people;
+        public MainWindow(string Text)
         {
+            
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
+            mainText.Content = "Welcome Back " + Text + "!";
+            UpdatePeople();
+        }
+
+        private void todayPeople_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selectedPerson = todayPeople.SelectedItem as Person;
+            if (selectedPerson != null)
+            {
+                var window = new PersonWindow(selectedPerson);
+                if (window.ShowDialog() ?? false)
+                {
+                    UpdatePeople();
+                }
+                todayPeople.UnselectAll();
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new PersonWindow(null);
+            if (window.ShowDialog() ?? false)
+            {
+                UpdatePeople();
+            }
+        }
+
+        private void UpdatePeople()
+        {
+            people = PersonDataProvider.GetPeople();
+            DateTime ActualTime = DateTime.Now;
+            dateText.Content = "Today's date is: " + ActualTime.ToShortDateString().ToString();
+            IList<Person> NotDiagnosed = new List<Person>();
+            foreach(Person p in people)
+            {
+                if(p.Diagnosis == null)
+                {
+                    NotDiagnosed.Add(p);
+                }
+            }
+            todayPeople.ItemsSource = NotDiagnosed;
         }
     }
 }

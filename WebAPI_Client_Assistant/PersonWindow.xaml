@@ -1,0 +1,56 @@
+﻿<Window x:Class="WebAPI_Client_Assistant.PersonWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WebAPI_Client_Assistant"
+        mc:Ignorable="d"
+        Title="PersonWindow" Height="450" Width="800">
+    <Grid Background="#403A39">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Column="0" Grid.Row="0" Content="First Name:" Margin="10" Foreground="White" FontSize="16"/>
+            <TextBox Grid.Column="1" Grid.Row="0" x:Name="FirstNameTextBox" Margin="0, 15, 15, 15"/>
+
+            <Label Grid.Column="0" Grid.Row="1" Content="Last Name:" Margin="10" Foreground="White" FontSize="16"/>
+            <TextBox Grid.Column="1" Grid.Row="1" x:Name="LastNameTextBox" Margin="0, 15, 15, 15"/>
+
+            <Label Grid.Column="0" Grid.Row="2" Content="Date Of Birth:" Margin="10" Foreground="White" FontSize="16"/>
+            <DatePicker Grid.Column="1" Grid.Row="2" x:Name="DateTextBox" Margin="0, 15, 15, 15"/>
+
+            <Label Grid.Column="0" Grid.Row="3" Content="Address:" Margin="10" Foreground="White" FontSize="16"/>
+            <TextBox Grid.Column="1" Grid.Row="3" x:Name="AddressTextBox" Margin="0, 15, 15, 15"/>
+
+            <Label Grid.Column="0" Grid.Row="4" Content="Social Security Number:" Margin="10" Foreground="White" FontSize="16"/>
+            <TextBox Grid.Column="1" Grid.Row="4" x:Name="SocialSecurityNumberTextBox" Margin="0, 15, 15, 15"/>
+
+            <Label Grid.Column="0" Grid.Row="5" Content="Complaint:" Margin="10" Foreground="White" FontSize="16"/>
+            <TextBox Grid.Column="1" Grid.Row="5" x:Name="ComplaintTextBox" Margin="0, 15, 15, 15"/>
+
+            <Label Grid.Column="0" Grid.Row="6" Content="Date of Arrival:" Margin="10" Foreground="White" FontSize="16"/>
+            <TextBox Grid.Column="1" Grid.Row="6" x:Name="DateOfArrivalTextBox" Margin="0, 15, 15, 15"/>
+
+        </Grid>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+            <Button x:Name="CompletePatient" Content="Complete Patient" Width="150" Height="30" Margin="20 0 20 25" Click="CompleteButton_Click" FontSize="16"/>
+            <Button x:Name="ModifyDate" Content="Modify Arrival" Width="150" Height="30" Margin="20 0 20 25" Click="ModifyButton_Click" FontSize="16"/>
+            <Button x:Name="DeletePatient" Content="Delete Patient" Width="150" Height="30" Margin="20 0 20 25" Click="DeleteButton_Click" FontSize="16"/>
+        </StackPanel>
+    </Grid>
+</Window>

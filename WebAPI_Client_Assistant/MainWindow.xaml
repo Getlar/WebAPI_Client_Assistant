@@ -5,8 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WebAPI_Client_Assistant"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="HealthCare - Assistant" Height="900" Width="1000">
+    <Grid  Background="#403A39">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0">
+            <Label x:Name="mainText" HorizontalAlignment="Center" FontWeight="Bold" Margin="0 50 0 0" VerticalAlignment="Center" FontSize="60" Foreground="White"/>
+            <Label x:Name="dateText" Margin="20" HorizontalAlignment="Center" Foreground="White" FontSize="20"></Label>
+            <Separator Margin="20 0 20 10"/>
+        </StackPanel>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Background="#403A39">
+                <Label Content="Patient List:" HorizontalAlignment="Center" Foreground="White" FontSize="20"></Label>
+                <ListBox HorizontalAlignment="Center" Margin="10" VerticalAlignment="Top" x:Name="todayPeople" SelectionChanged="todayPeople_SelectionChanged" SelectionMode="Single" Height="500" Width="400"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Button Content="Add Patient" Width="100" Margin="20" FontSize="14" Click="Button_Click"></Button>
+            <Separator Margin="20 60 20 0"/>
+        </Grid>
     </Grid>
+    
 </Window>
