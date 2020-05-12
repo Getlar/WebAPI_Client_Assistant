@@ -28,7 +28,6 @@ namespace WebAPI_Client_Assistant
 
         public MainWindow(string Text)
         {
-            
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
             mainText.Content = "Welcome Back " + Text + "!";
@@ -37,7 +36,7 @@ namespace WebAPI_Client_Assistant
 
         private void todayPeople_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selectedPerson = todayPeople.SelectedItem as Person;
+            var selectedPerson = PatientDataGrid.SelectedItem as Person;
             if (selectedPerson != null)
             {
                 var window = new PersonWindow(selectedPerson);
@@ -45,7 +44,7 @@ namespace WebAPI_Client_Assistant
                 {
                     UpdatePeople();
                 }
-                todayPeople.UnselectAll();
+                PatientDataGrid.UnselectAll();
             }
         }
 
@@ -64,15 +63,14 @@ namespace WebAPI_Client_Assistant
             DateTime ActualTime = DateTime.Now;
             dateText.Content = "Today's date is: " + ActualTime.ToShortDateString().ToString();
             IList<Person> SortedList = people.OrderBy(o => o.DateOfArrival).ToList();
-            IList<Person> NotDiagnosed = new List<Person>();
-            foreach(Person p in SortedList)
+            PatientDataGrid.Items.Clear();
+            foreach (Person p in SortedList)
             {
-                if(p.Diagnosis == null)
+                if (p.Diagnosis == null)
                 {
-                    NotDiagnosed.Add(p);
+                    PatientDataGrid.Items.Add(p);
                 }
             }
-            todayPeople.ItemsSource = NotDiagnosed;
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

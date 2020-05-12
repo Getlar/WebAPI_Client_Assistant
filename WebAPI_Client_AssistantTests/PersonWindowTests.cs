@@ -24,7 +24,7 @@ namespace WebAPI_Client_Assistant.Tests
         {
             PersonWindow pw = new PersonWindow(null);
             bool result = pw.ValidateDate("2020-02-02 08:00");
-            Assert.AreEqual(true, result);
+            Assert.AreEqual(false, result);
         }
 
         [TestMethod()]
@@ -69,7 +69,8 @@ namespace WebAPI_Client_Assistant.Tests
         [DataRow("abc abc", false)]
         [DataRow("1998-24-24 09:00", false)]
         [DataRow("1998-11-04 40:04", false)]
-        [DataRow("1998-11-04 08:00", true)]
+        [DataRow("1998-11-04 08:00", false)]
+        [DataRow("2020-11-04 08:00", true)]
         [DataTestMethod]
         public void ValidateDate1(string arg, bool expected)
         {
