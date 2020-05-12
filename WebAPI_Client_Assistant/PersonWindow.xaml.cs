@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -46,6 +47,12 @@ namespace WebAPI_Client_Assistant
             }
             else
             {
+                DateOfArrivalTextBox.Foreground = Brushes.Gray;
+                FirstNameTextBox.Foreground = Brushes.Gray;
+                LastNameTextBox.Foreground = Brushes.Gray;
+                SocialSecurityNumberTextBox.Foreground = Brushes.Gray;
+                AddressTextBox.Foreground = Brushes.Gray;
+                ComplaintTextBox.Foreground = Brushes.Gray;
                 DeletePatient.Visibility = Visibility.Collapsed;
                 ModifyDate.Visibility = Visibility.Collapsed;
                 FirstNameTextBox.Text = "First Name...";
@@ -110,6 +117,7 @@ namespace WebAPI_Client_Assistant
 
         public bool ValidateName(string name)
         {
+            
             bool result = true;
             string[] Subnames = name.Split(' ');
             foreach (string subname in Subnames)
@@ -153,13 +161,27 @@ namespace WebAPI_Client_Assistant
             {
                 result = false;
             }
-            else if(date.Length==16 || date.Length==19)
+            else if (date.Length == 16 || date.Length == 19)
             {
                 result = true;
             }
             else
             {
                 result = false;
+            }
+            if (result != false)
+            {
+                if (DateChecker.Ticks < DateTime.Now.Ticks)
+                {
+                    result = false;
+                }
+                IList<Person> person = PersonDataProvider.GetPeople();
+                var match = person.Where(p => p.DateOfArrival == DateChecker);
+                IList<Person> act = match.ToList();
+                if(act.Count != 0)
+                {
+                    return false;
+                }
             }
             return result;
         }
@@ -209,6 +231,10 @@ namespace WebAPI_Client_Assistant
                 DialogResult = true;
                 Close();
             }
+            else
+            {
+                MessageBox.Show("Incorrect Date Format Or Date Is Occupied!", "Format Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
 
@@ -243,7 +269,7 @@ namespace WebAPI_Client_Assistant
                             }
                             else
                             {
-                                MessageBox.Show("Incorrect Date Format!", "Format Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                MessageBox.Show("Incorrect Date Format Or Date Is Occupied!", "Format Error", MessageBoxButton.OK, MessageBoxImage.Error);
                             }
                         }
                         else
@@ -269,6 +295,7 @@ namespace WebAPI_Client_Assistant
             if (FirstNameTextBox.Text == "")
             {
                 FirstNameTextBox.Text = "First Name...";
+                FirstNameTextBox.Foreground = Brushes.Gray;
             }
         }
 
@@ -277,6 +304,7 @@ namespace WebAPI_Client_Assistant
             if (FirstNameTextBox.Text == "First Name...")
             {
                 FirstNameTextBox.Text = "";
+                FirstNameTextBox.Foreground = Brushes.White;
             }
         }
 
@@ -285,6 +313,7 @@ namespace WebAPI_Client_Assistant
             if (LastNameTextBox.Text == "Last Name...")
             {
                 LastNameTextBox.Text = "";
+                LastNameTextBox.Foreground = Brushes.White;
             }
         }
 
@@ -293,6 +322,7 @@ namespace WebAPI_Client_Assistant
             if (LastNameTextBox.Text == "")
             {
                 LastNameTextBox.Text = "Last Name...";
+                LastNameTextBox.Foreground = Brushes.Gray;
             }
         }
 
@@ -302,6 +332,7 @@ namespace WebAPI_Client_Assistant
             if (AddressTextBox.Text == "Postal Code, City, Street Address...")
             {
                 AddressTextBox.Text = "";
+                AddressTextBox.Foreground = Brushes.White;
             }
         }
 
@@ -310,6 +341,7 @@ namespace WebAPI_Client_Assistant
             if (AddressTextBox.Text == "")
             {
                 AddressTextBox.Text = "Postal Code, City, Street Address...";
+                AddressTextBox.Foreground = Brushes.Gray;
             }
         }
 
@@ -318,6 +350,7 @@ namespace WebAPI_Client_Assistant
             if (SocialSecurityNumberTextBox.Text == "XXX XXX XXX")
             {
                 SocialSecurityNumberTextBox.Text = "";
+                SocialSecurityNumberTextBox.Foreground = Brushes.White;
             }
         }
 
@@ -326,6 +359,7 @@ namespace WebAPI_Client_Assistant
             if (SocialSecurityNumberTextBox.Text == "")
             {
                 SocialSecurityNumberTextBox.Text = "XXX XXX XXX";
+                SocialSecurityNumberTextBox.Foreground = Brushes.Gray;
             }
         }
 
@@ -334,6 +368,7 @@ namespace WebAPI_Client_Assistant
             if (ComplaintTextBox.Text == "Symptoms...")
             {
                 ComplaintTextBox.Text = "";
+                ComplaintTextBox.Foreground = Brushes.White;
             }
         }
 
@@ -342,6 +377,7 @@ namespace WebAPI_Client_Assistant
             if (ComplaintTextBox.Text == "")
             {
                 ComplaintTextBox.Text = "Symptoms...";
+                ComplaintTextBox.Foreground = Brushes.Gray;
             }
         }
 
@@ -350,6 +386,7 @@ namespace WebAPI_Client_Assistant
             if (DateOfArrivalTextBox.Text == "yyyy-MM-dd HH:mm")
             {
                 DateOfArrivalTextBox.Text = "";
+                DateOfArrivalTextBox.Foreground = Brushes.White;
             }
         }
 
@@ -358,6 +395,7 @@ namespace WebAPI_Client_Assistant
             if (DateOfArrivalTextBox.Text == "")
             {
                 DateOfArrivalTextBox.Text = "yyyy-MM-dd HH:mm";
+                DateOfArrivalTextBox.Foreground = Brushes.Gray;
             }
         }
     }
